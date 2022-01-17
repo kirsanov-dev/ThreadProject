@@ -1,3 +1,7 @@
 import UIKit
 
-var greeting = "Hello, playground"
+let generator = Generator()
+let worker = Worker()
+
+worker.start()
+generator.start()
