@@ -1,7 +1,8 @@
 import UIKit
 
-let generator = Generator()
-let worker = Worker(chipLimit: Generator.chipLimit)
+let chipStorage = ChipStorage()
+let generator = Generator(for: chipStorage)
+let worker = Worker(for: chipStorage)
 
 worker.start()
 generator.start()
