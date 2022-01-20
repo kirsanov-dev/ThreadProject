@@ -1,24 +1,24 @@
 import Foundation
 
 public class Worker: Thread {
-    var chipLimit: Int
+    var chipStorage: ChipStorage
     
-    public init(chipLimit: Int) {
-        self.chipLimit = chipLimit
+    public init(for chipStorage: ChipStorage) {
+        self.chipStorage = chipStorage
     }
     
     public override func main() {
-        for _ in 1...chipLimit {
-            while (!isAvailable) {
-                condition.wait()
+        while true {
+            while (!self.chipStorage.isAvailable) {
+                self.chipStorage.condition.wait()
             }
-            let lastChip = chipStorage.removeLast()
-            condition.signal()
-            condition.unlock()
+            let lastChip = self.chipStorage.storage.removeLast()
+            self.chipStorage.condition.signal()
+            self.chipStorage.condition.unlock()
             lastChip.soldering()
             print("Чип припаян.")
-            if chipStorage.count < 1 {
-                isAvailable = false
+            if self.chipStorage.storage.count < 1 {
+                self.chipStorage.isAvailable = false
             }
         }
     }
