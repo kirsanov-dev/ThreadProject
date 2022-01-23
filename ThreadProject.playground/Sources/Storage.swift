@@ -2,6 +2,7 @@ import Foundation
 
 public class Storage {
     private var storage: [Chip] = []
+    private var counter: Int = 0
     var isAvailable = false
     let condition = NSCondition()
     
@@ -11,8 +12,10 @@ public class Storage {
     
     public init() {}
     
-    func push(value : Chip) {
-        storage.append(value)
+    func push() {
+        storage.append(Chip.make())
+        counter += 1
+        print("Чип \(counter) добавлен в хранилище.")
     }
     
     func pop() -> Chip {

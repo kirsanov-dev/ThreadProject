@@ -9,16 +9,16 @@ public class Worker: Thread {
     
     public override func main() {
         while true {
-            while (!self.storage.isAvailable) {
-                self.storage.condition.wait()
+            while (!storage.isAvailable) {
+                storage.condition.wait()
             }
             let lastChip = self.storage.pop()
-            self.storage.condition.signal()
-            self.storage.condition.unlock()
+            storage.condition.signal()
+            storage.condition.unlock()
             lastChip.soldering()
             print("Чип припаян.")
-            if self.storage.isEmpty {
-                self.storage.isAvailable = false
+            if storage.isEmpty {
+                storage.isAvailable = false
             }
         }
     }
