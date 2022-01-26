@@ -1,3 +1,10 @@
 import UIKit
 
-var greeting = "Hello, playground"
+let storage = Storage()
+let generator = Generator(for: storage)
+let worker = Worker(for: storage)
+
+generator.start()
+worker.start()
+
+
