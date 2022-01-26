@@ -12,11 +12,7 @@ public class Generator: Thread {
     
     public override func main() {
         timer = Timer(timeInterval: interval, repeats: true) { _ in
-            self.storage.condition.lock()
-            self.storage.push()
-            self.storage.isAvailable = true
-            self.storage.condition.signal()
-            self.storage.condition.unlock()
+            self.storage.push(item: Chip.make())
         }
         RunLoop.current.add(timer, forMode: .common)
         RunLoop.current.run(until: Date.init(timeIntervalSinceNow: deadline))
