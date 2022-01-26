@@ -8,18 +8,10 @@ public class Worker: Thread {
     }
     
     public override func main() {
-        while true {
-            while (!storage.isAvailable) {
-                storage.condition.wait()
-            }
+        repeat {
             let lastChip = self.storage.pop()
-            storage.condition.signal()
-            storage.condition.unlock()
             lastChip.soldering()
             print("Чип припаян.")
-            if storage.isEmpty {
-                storage.isAvailable = false
-            }
-        }
+        } while storage.isAvailable || storage.isEmpty
     }
 }
