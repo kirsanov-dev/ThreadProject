@@ -11,7 +11,7 @@ public class Generator: Thread {
     }
     
     public override func main() {
-        timer = Timer(timeInterval: interval, repeats: true) { _ in
+        timer = Timer(timeInterval: interval, repeats: true) { [unowned self] _ in
             self.storage.push(item: Chip.make())
         }
         RunLoop.current.add(timer, forMode: .common)

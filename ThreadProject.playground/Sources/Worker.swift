@@ -9,7 +9,7 @@ public class Worker: Thread {
     
     public override func main() {
         repeat {
-            let lastChip = self.storage.pop()
+            let lastChip = storage.pop()
             lastChip.soldering()
             print("Чип припаян.")
         } while storage.isAvailable || storage.isEmpty
